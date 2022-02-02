@@ -31,6 +31,6 @@ Route::get('/subscribe/{id}', [App\Http\Controllers\SubscribeController::class, 
 Route::post('/subscribe/{id}', [App\Http\Controllers\SubscribeController::class, 'process'])->name('subscribe');
 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
-    Route::resource('/users',  UsersController::class, ['except' => ['create', 'show', 'store']]);
-    Route::resource('/downloads',  DownloadsController::class, ['except' => ['show']]);
+    Route::resource('/users', UsersController::class, ['except' => ['create', 'show', 'store']]);
+    Route::resource('/downloads', DownloadsController::class, ['except' => ['show']]);
 });

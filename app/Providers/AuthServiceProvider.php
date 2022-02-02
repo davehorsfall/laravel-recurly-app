@@ -43,6 +43,6 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('delete-downloads', function ($user) {
             return $user->hasRole('admin');
-        });   
+        });
     }
 }
