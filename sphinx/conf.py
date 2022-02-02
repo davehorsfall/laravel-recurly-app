@@ -12,18 +12,15 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../adifa'))
-
 
 # -- Project information -----------------------------------------------------
 
-project = 'Adifa'
-copyright = '2022, Haniffa Lab'
-author = 'Haniffa Lab'
+project = 'LARS'
+copyright = '2022, Dave Horsfall'
+author = 'Dave Horsfall'
 
 # The full version, including alpha/beta/rc tags
 release = '0.1.0'
-
 
 # -- General configuration ---------------------------------------------------
 

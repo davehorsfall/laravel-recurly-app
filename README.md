@@ -1,7 +1,7 @@
 [![tests](https://github.com/davehorsfall/lars/actions/workflows/test-coverage.yml/badge.svg)](https://github.com/davehorsfall/lars/actions/workflows/test-coverage.yml)
 [![sphinx](https://github.com/davehorsfall/lars/actions/workflows/sphinx-build.yml/badge.svg)](https://github.com/davehorsfall/lars/actions/workflows/sphinx-build.yml)
 [![codecov](https://codecov.io/gh/davehorsfall/lars/branch/main/graph/badge.svg?token=3XVRW2WDDC)](https://codecov.io/gh/davehorsfall/lars)
-[![style](https://github.styleci.io/repos/279132932/shield?style=flat&branch=master)](https://github.styleci.io/repos/279132932?branch=master)
+[![style](https://github.styleci.io/repos/450031624/shield?branch=main)](https://github.styleci.io/repos/450031624?branch=main)
 [![laravel](https://img.shields.io/badge/laravel-8-blue)](https://laravel.com/docs/8.x/)
 
 ## DIGITAL SUBSCRIPTIONS

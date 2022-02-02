@@ -11,12 +11,9 @@
 .. |DOI| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.5824895.svg
    :target: https://doi.org/10.5281/zenodo.5824895
 
-.. raw:: html
 
-    <h2>SINGLE CELL INSIGHTS</h2>
-
-Adifa - Annotated Data in Flask App
-===================================
+LARS - Laravel App for Recurly Subscriptions
+============================================
 
 Adifa is a framework for visualising single-cell gene expression data in a web browser. 
 It is built on `Flask`_, a micro web framework, and ingests `Annotated Data`_ objects 
