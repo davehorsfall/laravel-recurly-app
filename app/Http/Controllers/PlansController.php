@@ -16,6 +16,7 @@ class PlansController extends Controller
     {
         $client = new \Recurly\Client(env('RECURLY_PRIVATE_API_KEY'));
         $plans = $client->listPlans();
+
         return view('plans.index')->with('plans', $plans);
     }
 
@@ -25,7 +26,7 @@ class PlansController extends Controller
      * @param  \App\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function show(Plan  $plan)
+    public function show(Plan $plan)
     {
         return view('plans.show')->with('plan', $plan);
     }

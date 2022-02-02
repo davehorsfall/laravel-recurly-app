@@ -24,7 +24,6 @@ class ProfileController extends Controller
      */
     public function index()
     {
-
         $page_num = isset($_GET['page']) ? (int) $_GET['page'] : 0;
         $per_page = 5;
 
