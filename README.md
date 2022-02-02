@@ -3,11 +3,11 @@
 [![sphinx](https://github.com/haniffalab/sci-adifa/actions/workflows/sphinx-build.yml/badge.svg)](https://github.com/haniffalab/sci-adifa/actions/workflows/sphinx-build.yml)
 [![codecov](https://codecov.io/gh/davehorsfall/laravel-recurly-client/branch/master/graph/badge.svg?token=SKROES7BUU)](https://codecov.io/gh/davehorsfall/laravel-recurly-client)
 [![style](https://github.styleci.io/repos/279132932/shield?style=flat&branch=master)](https://github.styleci.io/repos/279132932?branch=master)
-[![laravel](https://img.shields.io/badge/laravel-7-blue)](https://python.org)
+[![laravel](https://img.shields.io/badge/laravel-8-blue)](https://laravel.com/docs/8.x/)
 
 ## DIGITAL SUBSCRIPTIONS
 
-# laravel-recurly-client
+# Laravel App for Recurly Subscriptions (LARS)
 
 [![docs](https://img.shields.io/badge/Documentation-online-blue)](https://haniffalab.github.io/sci-adifa)
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf14086919a839fe740e00554e4baff6",
+    "content-hash": "06d4b3b09d4caca7452a2c3a1c1bfaae",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2593,6 +2593,58 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "recurly/recurly-client",
+            "version": "4.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/recurly/recurly-client-php.git",
+                "reference": "2fa5f810343c029bab3bc8ab813a2b8b0bac601b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/recurly/recurly-client-php/zipball/2fa5f810343c029bab3bc8ab813a2b8b0bac601b",
+                "reference": "2fa5f810343c029bab3bc8ab813a2b8b0bac601b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7.2.0",
+                "psr/log": "^1.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "phpcompatibility/php-compatibility": "^9.3",
+                "phpdocumentor/phpdocumentor": "~3.0.0",
+                "phpstan/phpstan": "^0.12.11",
+                "phpunit/phpunit": "^8",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib"
+                ],
+                "files": [
+                    "lib/recurly.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The PHP client library for the Recurly API",
+            "homepage": "https://github.com/recurly/recurly-client-php",
+            "keywords": [
+                "pay",
+                "payments",
+                "recurly"
+            ],
+            "support": {
+                "issues": "https://github.com/recurly/recurly-client-php/issues",
+                "source": "https://github.com/recurly/recurly-client-php/tree/4.12.0"
+            },
+            "time": "2022-01-28T21:02:46+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
