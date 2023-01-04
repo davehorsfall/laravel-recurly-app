@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Download;
+use App\Models\Download;
 use App\Http\Controllers\Controller;
+use Gate;
 use Illuminate\Http\Request;
 
 class DownloadsController extends Controller
@@ -18,11 +19,20 @@ class DownloadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $downloads = Download::all();
+        $filter = $request->query('filter');
 
-        return view('admin.downloads.index')->with('downloads', $downloads);
+        if (!empty($filter)) {
+            $downloads = Download::sortable()
+                ->where('downloads.name', 'like', '%'.$filter.'%')
+                ->paginate(5);
+        } else {
+            $downloads = Download::sortable()
+                ->paginate(5);
+        }
+
+        return view('admin.downloads.index')->with('downloads', $downloads)->with('filter', $filter);
     }
 
     /**
@@ -46,6 +56,7 @@ class DownloadsController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:downloads|max:255',
+            'tags' => 'required',
         ]);
 
         // store
@@ -53,9 +64,11 @@ class DownloadsController extends Controller
         $download->name = $validated['name'];
         $download->filename = $validated['name'];
         if ($download->save()) {
-            $request->session()->flash('success', 'User has been updated');
+            $tags = explode(", ", $request->tags);
+            $download->tag($tags);            
+            $request->session()->flash('success', 'Download has been updated');
         } else {
-            $request->session()->flash('error', 'There was an error updating the user');
+            $request->session()->flash('error', 'There was an error updating the download');
         }
 
         return redirect()->route('admin.downloads.index');
@@ -78,9 +91,15 @@ class DownloadsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Download $download)
     {
-        //
+        if (Gate::denies('edit-downloads')) {
+            return redirect(route('admin.downloads.index'));
+        }
+
+        return view('admin.downloads.edit')->with([
+            'download' => $download,
+        ]);
     }
 
     /**
@@ -90,9 +109,19 @@ class DownloadsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Download $download)
     {
-        //
+        $download->name = $request->name;
+        $download->filename = $request->filename;
+        if ($download->save()) {
+            $tags = explode(", ", $request->tags);
+            $download->tag($tags);                        
+            $request->session()->flash('success', 'Download has been updated');
+        } else {
+            $request->session()->flash('error', 'There was an error updating the download');
+        }
+
+        return redirect()->route('admin.downloads.index');
     }
 
     /**
@@ -101,8 +130,18 @@ class DownloadsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Download $download)
     {
-        //
+        if (Gate::denies('delete-downloads')) {
+            return redirect(route('admin.downloads.index'));
+        }
+
+        if ($download->delete()) {
+            $request->session()->flash('success', 'Download has been deleted');
+        } else {
+            $request->session()->flash('error', 'There was an error deleting the download');
+        }
+
+        return redirect()->route('admin.downloads.index');
     }
 }

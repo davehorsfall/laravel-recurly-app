@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Download;
+use App\Models\Download;
 use Illuminate\Http\Request;
 
 class DownloadsController extends Controller
@@ -22,7 +22,7 @@ class DownloadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Download  $download
+     * @param  \App\Models\Download  $download
      * @return \Illuminate\Http\Response
      */
     public function show(Download $download)

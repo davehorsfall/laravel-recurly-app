@@ -19,15 +19,4 @@ class PlansController extends Controller
 
         return view('plans.index')->with('plans', $plans);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Plan $plan)
-    {
-        return view('plans.show')->with('plan', $plan);
-    }
 }

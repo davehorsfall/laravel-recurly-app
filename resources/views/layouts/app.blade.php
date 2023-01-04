@@ -38,13 +38,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('plans.index') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ route('welcome') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('plans.index') }}">{{ __('Features') }}</a>
+                            <a class="nav-link" href="{{ route('features') }}">{{ __('Features') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('plans.index') }}">{{ __('Pricing') }}</a>
+                            <a class="nav-link" href="{{ route('pricing') }}">{{ __('Pricing') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('downloads.index') }}">{{ __('Downloads') }}</a>
@@ -77,8 +77,8 @@
 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('profile') }}">
-                                            {{ __('Profile') }}
+                                        <a class="dropdown-item" href="{{ route('account.show') }}">
+                                            {{ __('Account') }}
                                         </a>
                                     </li>
                                     <li>
@@ -118,14 +118,26 @@
                 </div>
             </div>
         </nav>
+        
+
+        @if (\Request::is('/'))  
+            @include('layouts.header')
+        @endif
 
         <main class="py-4">
-            @yield('content')
+            <section class="py-5">
+                <div class="container my-5">            
+                    @include('partials.flash')
+                    @yield('content')
+                </div>
+            </section>
         </main>
 
-        @include('layouts.footer');
+        @include('layouts.footer')
 
     </div>
+    <!-- Footer Scripts Stack -->
+    @stack('scripts')    
 </body>
 
 </html>

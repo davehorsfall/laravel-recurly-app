@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Role;
-use App\User;
+use App\Models\Role;
+use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 
@@ -20,11 +20,20 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $filter = $request->query('filter');
 
-        return view('admin.users.index')->with('users', $users);
+        if (!empty($filter)) {
+            $users = User::sortable()
+                ->where('users.name', 'like', '%'.$filter.'%')
+                ->paginate(5);
+        } else {
+            $users = User::sortable()
+                ->paginate(5);
+        }
+
+        return view('admin.users.index')->with('users', $users)->with('filter', $filter);
     }
 
     /**
@@ -56,6 +65,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if (Gate::denies('edit-users')) {
+            return redirect(route('admin.users.index'));
+        }
+                
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email:rfc,dns|unique:users,email,' . $user->id,
+        ]);
+
         $user->roles()->sync($request->roles);
 
         $user->name = $request->name;
