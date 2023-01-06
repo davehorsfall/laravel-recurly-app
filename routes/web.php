@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome');
+})->name('home');
 
 Route::get('/features', function () {
     return view('features');
@@ -29,7 +30,15 @@ Auth::routes();
 
 Route::get('/account', [App\Http\Controllers\AccountController::class, 'show'])->name('account.show');
 Route::get('/account/edit', [App\Http\Controllers\AccountController::class, 'edit'])->name('account.edit');
-Route::put('/account/edit', [App\Http\Controllers\AccountController::class, 'update'])->name('account.edit');
+Route::put('/account/update', [App\Http\Controllers\AccountController::class, 'update'])->name('account.update');
+Route::get('/account/password', [App\Http\Controllers\PasswordController::class, 'edit'])->middleware('password.confirm')->name('password.change');
+Route::put('/account/password/update', [App\Http\Controllers\PasswordController::class, 'update'])->middleware('password.confirm')->name('password.update');
+
+Route::get('/account/billing', [App\Http\Controllers\CashierController::class, 'billing'])->name('cashier.billing');
+Route::post('/account/billing/update', [App\Http\Controllers\CashierController::class, 'update'])->name('cashier.update');
+
+
+
 Route::get('/subscribe/{id}', [App\Http\Controllers\SubscribeController::class, 'checkout'])->name('subscribe');
 Route::post('/subscribe/{id}', [App\Http\Controllers\SubscribeController::class, 'process'])->name('subscribe');
 
@@ -43,4 +52,15 @@ Route::resource('subscriptions', App\Http\Controllers\SubscriptionsController::c
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource('/users', UsersController::class, ['except' => ['create', 'show', 'store']]);
     Route::resource('/downloads', DownloadsController::class, ['except' => ['show']]);
+});
+
+
+Route::get('/subscription-checkout', function (Request $request) {
+    return $request->user()
+        ->newSubscription(env('STRIPE_PROD'), env('STRIPE_PRICE'))
+        ->allowPromotionCodes()
+        ->checkout([
+            'success_url' => route('home'),
+            'cancel_url' => route('home'),
+        ]);
 });
